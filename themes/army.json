@@ -1,0 +1,27 @@
+{
+    "bg-color": "#D1D2C7",
+    "wall": { "bg-color": "#D1D2C7", "border-size": 1, "border-color": "#1A1B0E" },
+    "empty": { "bg-color": "#1A1B0E", "border-size": 1, "border-color": "#1A1B0E" },
+    "I": { "bg-color": "#4F5328", "border-size": 1, "border-color": "#1A1B0E" },
+    "T": { "bg-color": "#727553", "border-size": 1, "border-color": "#1A1B0E" },
+    "O": { "bg-color": "#32351A", "border-size": 1, "border-color": "#1A1B0E" },
+    "Z": { "bg-color": "#A5A791", "border-size": 1, "border-color": "#1A1B0E" },
+    "S": { "bg-color": "#A5A791", "border-size": 1, "border-color": "#1A1B0E" },
+    "L": { "bg-color": "#3F4220", "border-size": 1, "border-color": "#1A1B0E" },
+    "J": { "bg-color": "#3F4220", "border-size": 1, "border-color": "#1A1B0E" },
+    "score": {
+        "label": { "font-size": 24, "font-color": "#1A1B0E" },
+        "value": { "font-size": 24, "font-color": "#1A1B0E" },
+        "box": { "border-size": 1, "border-color": "#1A1B0E", "bg-color": "#D1D2C7" }
+    },
+    "next-piece": {
+        "label": { "font-size": 24, "font-color": "#1A1B0E" },
+        "box": { "border-size": 1, "border-color": "#1A1B0E", "bg-color": "#D1D2C7" }
+    },
+    "controls": {
+        "label": { "font-size": 24, "font-color": "#1A1B0E" },
+        "value": { "font-size": 16, "font-color": "#1A1B0E" },
+        "box": { "border-size": 1, "border-color": "#1A1B0E", "bg-color": "#D1D2C7" }
+    },
+    "refs": ["https://www.htmlcsscolor.com/hex/4F5328"]
+}
