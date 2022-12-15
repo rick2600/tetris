@@ -159,17 +159,21 @@ class Tetris:
     def merge(self):
         changed = True
         merged = 0
+        bonus = 100
         while changed:
             changed = False
             for i in range(len(self.space) - 1):
                 if self.space[i].count(E) == 0:
+                    changed = True
                     self.space.pop(i)
                     self.space.insert(0, [W] + [E]*(self.cols-2) + [W])
-                    changed = True
+
+                    self.score += bonus
                     merged += 1
+                    bonus += 100
 
         if merged > 0:
-            self.score += merged * 100
+            #self.score += merged * 100 + bonus
             self.update_screen()
 
 
