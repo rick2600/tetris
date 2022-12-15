@@ -150,62 +150,62 @@ class Piece:
 
 
 class PieceI(Piece):
-    def __init__(self, space):
+    def __init__(self, space, rotate=True):
         matrix = np.array([
             [I, I, I, I],
         ])
-        super().__init__(matrix, space)
+        super().__init__(matrix, space, rotate)
 
 
 
 class PieceT(Piece):
-    def __init__(self, space):
+    def __init__(self, space, rotate=True):
         matrix = np.array([
             [0, T, 0],
             [T, T, T],
         ])
-        super().__init__(matrix, space)
+        super().__init__(matrix, space, rotate)
 
 
 class PieceO(Piece):
-    def __init__(self, space):
+    def __init__(self, space, rotate=True):
         matrix = np.array([
             [O, O],
             [O, O]
         ])
-        super().__init__(matrix, space)
+        super().__init__(matrix, space, rotate)
 
 
 class PieceZ(Piece):
-    def __init__(self, space):
+    def __init__(self, space, rotate=True):
         matrix = np.array([
             [Z, Z, 0],
             [0, Z, Z]
         ])
-        super().__init__(matrix, space)
+        super().__init__(matrix, space, rotate)
 
 class PieceS(Piece):
-    def __init__(self, space):
+    def __init__(self, space, rotate=True):
         matrix = np.array([
             [0, S, S],
             [S, S, 0]
         ])
-        super().__init__(matrix, space)
+        super().__init__(matrix, space, rotate)
 
 
 class PieceL(Piece):
-    def __init__(self, space):
+    def __init__(self, space, rotate=True):
         matrix = np.array([
             [0, 0, L],
             [L, L, L]
         ])
-        super().__init__(matrix, space)
+        super().__init__(matrix, space, rotate)
 
 
 class PieceJ(Piece):
-    def __init__(self, space):
+    def __init__(self, space, rotate=True):
         matrix = np.array([
             [J, 0, 0],
             [J, J, J]
         ])
-        super().__init__(matrix, space)
+        super().__init__(matrix, space, rotate)

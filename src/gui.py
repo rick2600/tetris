@@ -41,9 +41,11 @@ class GUI:
 
 
     def draw_cell(self, x, y, value):
-        rect = pygame.Rect(y, x, self.rect_size, self.rect_size)
         theme = self.theme.get(abs(value))
-        pygame.draw.rect(self.screen, theme['bg-color'], rect, 0)
+        radius = theme.get('border-radius', 0)
+
+        rect = pygame.Rect(y, x, self.rect_size, self.rect_size, border_radius=radius)
+        pygame.draw.rect(self.screen, theme['bg-color'], rect, 0, border_radius=radius)
         if theme['border-size']:
             pygame.draw.rect(
                 self.screen,

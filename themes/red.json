@@ -1,0 +1,28 @@
+{
+    "bg-color": "#150102",
+    "wall": { "bg-color": "#a95f61", "border-size": 1, "border-color": "#150102", "border-radius": 10},
+    "empty": { "bg-color": "#150102", "border-size": 1, "border-color": "#150102", "border-radius": 10 },
+    "I": { "bg-color": "#ef0f14", "border-size": 1, "border-color": "#150102", "border-radius": 10 },
+    "T": { "bg-color": "#f89496", "border-size": 1, "border-color": "#150102", "border-radius": 10 },
+    "O": { "bg-color": "#faaeb0", "border-size": 1, "border-color": "#150102", "border-radius": 10 },
+    "Z": { "bg-color": "#aa0005", "border-size": 1, "border-color": "#150102", "border-radius": 10 },
+    "S": { "bg-color": "#aa0005", "border-size": 1, "border-color": "#150102", "border-radius": 10 },
+    "L": { "bg-color": "#f4262b", "border-size": 1, "border-color": "#150102", "border-radius": 10 },
+    "J": { "bg-color": "#f4262b", "border-size": 1, "border-color": "#150102", "border-radius": 10 },
+    "score": {
+        "label": { "font-size": 24, "font-color": "#a95f61" },
+        "value": { "font-size": 24, "font-color": "#a95f61" },
+        "box": { "border-size": 1, "border-color": "#a95f61", "bg-color": "#150102" }
+    },
+    "next-piece": {
+        "label": { "font-size": 24, "font-color": "#a95f61" },
+        "box": { "border-size": 1, "border-color": "#a95f61", "bg-color": "#150102" }
+    },
+    "controls": {
+        "label": { "font-size": 24, "font-color": "#a95f61" },
+        "value": { "font-size": 16, "font-color": "#a95f61" },
+        "box": { "border-size": 1, "border-color": "#a95f61", "bg-color": "#150102" }
+    },
+    "refs": ["https://colordesigner.io/#450003-5C0002-94090D-D40D12-FF1D23"]
+}
+

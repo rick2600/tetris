@@ -6,6 +6,7 @@ import theme
 import pieces
 import glob
 import os
+import sys
 from pathlib import Path
 
 
@@ -75,7 +76,8 @@ class Tetris:
             [W, W, W, W, W, W, W, W, W, W, W, W]
         ]
         self.score = 1234
-        self.next_piece()
+        self.queue.append(pieces.PieceT(self.space, rotate=False))
+        #self.next_piece()
 
 
     def update_screen(self):
@@ -193,13 +195,15 @@ class Tetris:
         self.piece.action(self.action)
         self.playing = False
 
-    def run(self):
+    def run(self, debug_theme=False):
         clock = pygame.time.Clock()
 
-        self.new_game()
-        #self.reset_space_sample()
-        self.update_screen()
+        if debug_theme:
+            self.reset_space_sample()
+        else:
+            self.new_game()
 
+        self.update_screen()
 
         while self.running:
             self.process_events()
@@ -230,7 +234,11 @@ class Tetris:
             clock.tick(self.fps)
 
 
-
+debug_theme = False
 tetris = Tetris()
-tetris.run()
+
+if len(sys.argv) > 1 and sys.argv[1] == 'debugtheme':
+    debug_theme = True
+
+tetris.run(debug_theme)
 
