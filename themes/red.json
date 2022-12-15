@@ -23,6 +23,9 @@
         "value": { "font-size": 16, "font-color": "#a95f61" },
         "box": { "border-size": 1, "border-color": "#a95f61", "bg-color": "#150102" }
     },
+    "status": {
+        "value": { "font-size": 24, "font-color": "#a95f61" }
+    },
     "refs": ["https://colordesigner.io/#450003-5C0002-94090D-D40D12-FF1D23"]
 }
 

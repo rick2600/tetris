@@ -23,6 +23,9 @@
         "value": { "font-size": 16, "font-color": "#d6d6d6" },
         "box": { "border-size": 1, "border-color": "#d6d6d6", "bg-color": "#2e2e2e" }
     },
+    "status": {
+        "value": { "font-size": 24, "font-color": "#d6d6d6" }
+    },
     "refs": ["https://gist.github.com/r-malon/8fc669332215c8028697a0bbfbfbb32a"]
 }
 

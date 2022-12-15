@@ -4,10 +4,8 @@ import random
 import gui
 import theme
 import pieces
-import glob
 import os
 import sys
-from pathlib import Path
 
 
 
@@ -16,14 +14,18 @@ class Tetris:
         self.running = True
         self.cols = COLS
         self.rows = ROWS
-        self.themes = self.get_themes()
-        self.theme_idx = 0
-        self.theme = theme.Theme('monokai')
+
+        self.theme = theme.Theme()
+        self.theme.load('monokai')
 
         self.gui = gui.GUI(self.rows, self.cols, self.theme)
 
+        self.playing = False
+        self.restart = False
+        self.paused = True
         self.score = 0
-        self.queue = []
+        self.pieces_queue = []
+        self.fps = FPS
 
         self.pieces_types = [
             pieces.PieceI, pieces.PieceT,
@@ -31,16 +33,6 @@ class Tetris:
             pieces.PieceS, pieces.PieceL,
             pieces.PieceJ
         ]
-
-        self.fps = FPS
-        self.playing = False
-
-
-    def get_themes(self):
-        dirname = os.path.dirname(__file__)
-        path = os.path.realpath(os.path.join(dirname, '..', 'themes'))
-        themes = [Path(theme).stem for theme in glob.glob(f"{path}/*.json")]
-        return sorted(themes)
 
 
     def reset_space(self):
@@ -76,14 +68,23 @@ class Tetris:
             [W, W, W, W, W, W, W, W, W, W, W, W]
         ]
         self.score = 1234
-        self.queue.append(pieces.PieceT(self.space, rotate=False))
+        self.pieces_queue.append(pieces.PieceT(self.space, rotate=False))
         #self.next_piece()
 
 
     def update_screen(self):
         self.gui.draw_space(self.space)
         self.gui.draw_score_value(self.score)
-        self.gui.draw_next_piece(self.queue[0])
+        self.gui.draw_next_piece(self.pieces_queue[0])
+
+        status = None
+
+        if self.paused:
+            status = 'Paused'
+        elif self.playing:
+            status = 'Playing'
+
+        self.gui.draw_status_value(status)
         self.gui.update()
 
 
@@ -96,13 +97,13 @@ class Tetris:
     def next_piece(self):
         #self.pieces_types = [pieces.PieceI]
 
-        if not self.queue:
+        if not self.pieces_queue:
             piece_type = random.choice(self.pieces_types)
-            self.queue.append(piece_type(self.space))
+            self.pieces_queue.append(piece_type(self.space))
 
         piece_type = random.choice(self.pieces_types)
-        self.queue.append(piece_type(self.space))
-        self.piece = self.queue.pop(0)
+        self.pieces_queue.append(piece_type(self.space))
+        self.piece = self.pieces_queue.pop(0)
 
 
     def process_events(self):
@@ -131,31 +132,22 @@ class Tetris:
                         self.action = ROTATE
 
                 elif event.key == pygame.K_KP_PLUS:
-                    self.next_theme()
+                    self.theme.load_next()
+                    self.gui.reset_layout()
+                    self.update_screen()
 
                 elif event.key == pygame.K_KP_MINUS:
-                    self.prev_theme()
+                    self.theme.load_prev()
+                    self.gui.reset_layout()
+                    self.update_screen()
 
                 elif event.key == pygame.K_SPACE:
                     self.paused = not self.paused
 
-
-    def next_theme(self):
-        self.theme_idx += 1
-        if self.theme_idx == len(self.themes):
-            self.theme_idx = 0
-        self.theme.load(self.themes[self.theme_idx])
-        self.gui.reset_layout()
-        self.update_screen()
-
-
-    def prev_theme(self):
-        self.theme_idx -= 1
-        if self.theme_idx < 0:
-            self.theme_idx = len(self.themes) - 1
-        self.theme.load(self.themes[self.theme_idx])
-        self.gui.reset_layout()
-        self.update_screen()
+                elif event.key == pygame.K_n:
+                    if pygame.key.get_mods() & pygame.KMOD_CTRL:
+                        self.playing = False
+                        self.restart = True
 
 
     def merge(self):
@@ -180,32 +172,31 @@ class Tetris:
 
 
     def new_game(self):
-        self.score = 0
-        self.reset_space()
-        self.next_piece()
-        self.action = GO_DOWN
         self.playing = True
         self.paused = False
-        self.delay = 1000
+        self.restart = False
         self.rate = RATE
+        self.action = GO_DOWN
+        self.score = 0
+        self.pieces_queue.clear()
+        self.reset_space()
+        self.next_piece()
+
 
 
     def game_over(self):
-        print("Game over")
-        self.piece.action(self.action)
+        self.gui.draw_status_value('Game Over')
+        #self.piece.action(self.action)
         self.playing = False
 
-    def run(self, debug_theme=False):
+
+    def run(self):
         clock = pygame.time.Clock()
 
-        if debug_theme:
-            self.reset_space_sample()
-        else:
-            self.new_game()
-
-        self.update_screen()
+        self.reset_space_sample()
 
         while self.running:
+            self.update_screen()
             self.process_events()
 
             if self.playing and not self.paused:
@@ -217,7 +208,7 @@ class Tetris:
 
                 if self.rate <= 0 or self.fps > FPS:
                     self.piece.action(GO_DOWN)
-                    self.update_screen()
+                    #self.update_screen()
                     self.rate = RATE
 
                     if self.piece.stopped:
@@ -231,14 +222,12 @@ class Tetris:
 
                 self.rate -= 1
 
+            elif self.restart:
+                self.new_game()
+
             clock.tick(self.fps)
 
 
-debug_theme = False
 tetris = Tetris()
-
-if len(sys.argv) > 1 and sys.argv[1] == 'debugtheme':
-    debug_theme = True
-
-tetris.run(debug_theme)
+tetris.run()
 

@@ -17,33 +17,37 @@ GO_LEFT        = 1
 GO_RIGHT       = 2
 ROTATE         = 3
 
-FPS = 16
+FPS = 15
 RATE = 5
 
-# border-radius ?
 DEFAULT_THEME = {
-    "bg-color": "#ffffff",
-    "wall": { "bg-color": "#858585", "border-size": 1, "border-color": "#000000" },
-    "empty": { "bg-color": "#000000", "border-size": 1, "border-color": "#000000" },
-    "I": { "bg-color": "#ffffff", "border-size": 1, "border-color": "#000000" },
-    "T": { "bg-color": "#ffffff", "border-size": 1, "border-color": "#000000" },
-    "O": { "bg-color": "#ffffff", "border-size": 1, "border-color": "#000000" },
-    "Z": { "bg-color": "#ffffff", "border-size": 1, "border-color": "#000000" },
-    "S": { "bg-color": "#ffffff", "border-size": 1, "border-color": "#000000" },
-    "L": { "bg-color": "#ffffff", "border-size": 1, "border-color": "#000000" },
-    "J": { "bg-color": "#ffffff", "border-size": 1, "border-color": "#000000" },
+    "bg-color": "#2e2e2e",
+    "wall": { "bg-color": "#d6d6d6", "border-size": 1, "border-color": "#2e2e2e" },
+    "empty": { "bg-color": "#2e2e2e", "border-size": 1, "border-color": "#2e2e2e" },
+    "I": { "bg-color": "#6c99bb", "border-size": 1, "border-color": "#2e2e2e" },
+    "T": { "bg-color": "#b05279", "border-size": 1, "border-color": "#2e2e2e" },
+    "O": { "bg-color": "#9e86c8", "border-size": 1, "border-color": "#2e2e2e" },
+    "Z": { "bg-color": "#e87d3e", "border-size": 1, "border-color": "#2e2e2e" },
+    "S": { "bg-color": "#e87d3e", "border-size": 1, "border-color": "#2e2e2e" },
+    "L": { "bg-color": "#b4d273", "border-size": 1, "border-color": "#2e2e2e" },
+    "J": { "bg-color": "#b4d273", "border-size": 1, "border-color": "#2e2e2e" },
     "score": {
-        "label": { "font-size": 24, "font-color": "#000000" },
-        "value": { "font-size": 24, "font-color": "#ffffff" },
-        "box": { "border-size": 1, "border-color": "#000000", "bg-color": "#000000" }
+        "label": { "font-size": 24, "font-color": "#d6d6d6" },
+        "value": { "font-size": 24, "font-color": "#d6d6d6" },
+        "box": { "border-size": 1, "border-color": "#d6d6d6", "bg-color": "#2e2e2e" }
     },
     "next-piece": {
-        "label": { "font-size": 24, "font-color": "#000000" },
-        "box": { "border-size": 1, "border-color": "#000000", "bg-color": "#000000" }
+        "label": { "font-size": 24, "font-color": "#d6d6d6" },
+        "box": { "border-size": 1, "border-color": "#d6d6d6", "bg-color": "#2e2e2e" }
     },
     "controls": {
-        "label": { "font-size": 24, "font-color": "#000000" },
-        "value": { "font-size": 16, "font-color": "#ffffff" },
-        "box": { "border-size": 1, "border-color": "#000000", "bg-color": "#000000" }
-    }
+        "label": { "font-size": 24, "font-color": "#d6d6d6" },
+        "value": { "font-size": 16, "font-color": "#d6d6d6" },
+        "box": { "border-size": 1, "border-color": "#d6d6d6", "bg-color": "#2e2e2e" }
+    },
+    "status": {
+        "value": { "font-size": 24, "font-color": "#d6d6d6" }
+    },
+    "refs": ["https://gist.github.com/r-malon/8fc669332215c8028697a0bbfbfbb32a"]
 }
+

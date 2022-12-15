@@ -23,5 +23,8 @@
         "value": { "font-size": 16, "font-color": "#1A1B0E" },
         "box": { "border-size": 1, "border-color": "#1A1B0E", "bg-color": "#D1D2C7" }
     },
+    "status": {
+        "value": { "font-size": 24, "font-color": "#1A1B0E" }
+    },
     "refs": ["https://www.htmlcsscolor.com/hex/4F5328"]
 }

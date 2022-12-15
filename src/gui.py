@@ -38,6 +38,7 @@ class GUI:
         self.draw_controls_label()
         self.draw_controls_box()
         self.draw_controls_value()
+        self.draw_status_value()
 
 
     def draw_cell(self, x, y, value):
@@ -87,6 +88,9 @@ class GUI:
         prev_y, prev_x, prev_w, prev_h = self.controls_label
 
         self.controls_box = pygame.Rect(prev_y, prev_x + 1 * size, r_width, size * 6)
+        prev_y, prev_x, prev_w, prev_h = self.controls_box
+
+        self.status_value = pygame.Rect(prev_y, prev_x + prev_h + 1 * size, r_width, size)
 
 
 
@@ -163,36 +167,46 @@ class GUI:
         pygame.draw.rect(self.screen, border_color, self.controls_box, border_size)
 
 
-    def draw_controls_value(self):
-        theme = self.theme.get('controls')['value']
-        font = pygame.font.SysFont(None, theme['font-size'])
-        text = font.render("Controls", True, theme['font-color'])
-        #text_rect = text.get_rect(center=self.controls_label.center)
+    def draw_status_value(self, status=None):
+        if status != None:
+            bg_color = self.theme.get('bg-color')
+            theme = self.theme.get('status')
+            pygame.draw.rect(self.screen, bg_color, self.status_value, 0)
 
-        start_y = self.controls_box[0] + 10
-        start_x = self.controls_box[1] + 10
-        #self.screen.blit(text, (start_y + 10, start_x + 10))
-
-        controls_texts = [
-            'Go Left:  arrow left',
-            'Go Right: arrow right',
-            'Rotate:   arrow up',
-            'Go down faster: arrow down',
-            'Pause:    space',
-            'Load next theme: +',
-            'Load prev theme: -',
-
-        ]
-
-        for controls_text in controls_texts:
-            font = pygame.font.SysFont(None, theme['font-size'])
-            text = font.render(controls_text, True, theme['font-color'])
-            self.screen.blit(text, (start_y, start_x))
-            start_x += theme['font-size']
-
+            font = pygame.font.SysFont(None, theme['value']['font-size'])
+            text = font.render(str(status), True, theme['value']['font-color'])
+            text_rect = text.get_rect(center=self.status_value.center)
+            self.screen.blit(text, text_rect)
 
 
     def update(self):
         pygame.display.update()
 
 
+
+    def draw_controls_value(self):
+        theme = self.theme.get('controls')['value']
+        font = pygame.font.SysFont(None, theme['font-size'])
+        text = font.render("Controls", True, theme['font-color'])
+        start_y = self.controls_box[0] + 10
+        start_x = self.controls_box[1] + 10
+
+        controls_texts = [
+            ['Go Left',    'Arrow Left'],
+            ['Go Right',   'Arrow Right'],
+            ['Rotate',     'Arrow Up'],
+            ['Speed++',    'Arrow Down'],
+            ['Pause',      'Space'],
+            ['Next Theme', '+'],
+            ['Prev Theme', '-'],
+            ['New Game',   'CTRL+N']
+        ]
+
+        for legend, key in controls_texts:
+            font = pygame.font.SysFont(None, theme['font-size'])
+            text = font.render(legend, True, theme['font-color'])
+            self.screen.blit(text, (start_y, start_x))
+
+            text = font.render(key, True, theme['font-color'])
+            self.screen.blit(text, (start_y+5*theme['font-size'], start_x))
+            start_x += theme['font-size']

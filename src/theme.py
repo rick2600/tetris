@@ -1,17 +1,48 @@
 from constants import *
 import os
 import json
+import glob
+from pathlib import Path
+
 
 class Theme:
-    def __init__(self, theme_name):
-        self.load(theme_name)
+    def __init__(self):
+        self.current_idx = 0
+        self.theme_names = self.get_theme_names()
 
 
     def get(self, key):
         return self.theme_map[key]
 
 
+    def get_theme_names(self):
+        dirname = os.path.dirname(__file__)
+        path = os.path.realpath(os.path.join(dirname, '..', 'themes'))
+        themes = [Path(theme).stem for theme in glob.glob(f"{path}/*.json")]
+        return sorted(themes)
+
+
+    def load_next(self):
+        self.current_idx = (self.current_idx + 1) % len(self.theme_names)
+        self.load_theme_file(self.theme_names[self.current_idx])
+
+
+    def load_prev(self):
+        self.current_idx -= 1
+        if self.current_idx < 0:
+            self.current_idx = len(self.theme_names) - 1
+        self.load_theme_file(self.theme_names[self.current_idx])
+
+
     def load(self, theme_name):
+        try:
+            self.current_idx = self.theme_names.index(theme_name)
+        except ValueError:
+            pass
+        self.load_theme_file(self.theme_names[self.current_idx])
+
+
+    def load_theme_file(self, theme_name):
         dirname = os.path.dirname(__file__)
         path = os.path.join(dirname, '..', 'themes', f'{theme_name}.json')
         os.path.realpath(path)
@@ -47,3 +78,6 @@ class Theme:
 
         controls = theme.get('controls', DEFAULT_THEME['controls'])
         self.theme_map['controls'] = controls
+
+        status = theme.get('status', DEFAULT_THEME['status'])
+        self.theme_map['status'] = status
