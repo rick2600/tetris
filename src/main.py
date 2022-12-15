@@ -216,6 +216,7 @@ class Tetris:
                         self.action = GO_DOWN
                         self.merge()
                         self.next_piece()
+                        self.score += 10
                         if not self.piece.movable:
                             self.game_over()
                             self.update_screen()
