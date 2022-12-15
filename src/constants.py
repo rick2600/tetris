@@ -17,7 +17,8 @@ GO_LEFT        = 1
 GO_RIGHT       = 2
 ROTATE         = 3
 
-FPS = 15
+FPS = 13
+FPS_INC = 6
 RATE = 5
 
 DEFAULT_THEME = {

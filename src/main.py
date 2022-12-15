@@ -119,7 +119,7 @@ class Tetris:
 
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_DOWN:
-                    self.fps = FPS + 5
+                    self.fps = FPS + FPS_INC
 
                 elif event.key == pygame.K_LEFT:
                     self.action = GO_LEFT
