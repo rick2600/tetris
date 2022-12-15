@@ -1,7 +1,6 @@
 from constants import *
 import pygame
 import random
-import threading
 import gui
 import theme
 import pieces
@@ -104,33 +103,39 @@ class Tetris:
         self.piece = self.queue.pop(0)
 
 
+    def process_events(self):
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                self.running = False
 
+            elif event.type == pygame.KEYUP:
+                if event.key == pygame.K_DOWN:
+                    self.fps = FPS
+                else:
+                    self.action = GO_DOWN
 
-    def event_handling(self):
-        while self.running:
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    self.running = False
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_DOWN:
+                    self.fps = FPS + 5
 
-                elif event.type == pygame.KEYUP:
-                    if event.key == pygame.K_DOWN:
-                        self.fps = FPS
-                    else:
-                        self.action = GO_DOWN
+                elif event.key == pygame.K_LEFT:
+                    self.action = GO_LEFT
 
+                elif event.key == pygame.K_RIGHT:
+                    self.action = GO_RIGHT
 
-                elif event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_DOWN:
-                        #self.rate = 0
-                        self.fps = FPS + 5
-                    elif event.key == pygame.K_LEFT:  self.action = GO_LEFT
-                    elif event.key == pygame.K_RIGHT: self.action = GO_RIGHT
-                    elif event.key == pygame.K_UP:
-                        if self.action != ROTATE:
-                            self.action = ROTATE
-                    elif event.key == pygame.K_KP_PLUS: self.next_theme()
-                    elif event.key == pygame.K_KP_MINUS: self.prev_theme()
-                    elif event.key == pygame.K_SPACE:  self.paused = not self.paused
+                elif event.key == pygame.K_UP:
+                    if self.action != ROTATE:
+                        self.action = ROTATE
+
+                elif event.key == pygame.K_KP_PLUS:
+                    self.next_theme()
+
+                elif event.key == pygame.K_KP_MINUS:
+                    self.prev_theme()
+
+                elif event.key == pygame.K_SPACE:
+                    self.paused = not self.paused
 
 
     def next_theme(self):
@@ -176,6 +181,7 @@ class Tetris:
         self.playing = True
         self.paused = False
         self.delay = 1000
+        self.rate = RATE
 
 
     def game_over(self):
@@ -190,15 +196,10 @@ class Tetris:
         #self.reset_space_sample()
         self.update_screen()
 
-        clock.tick(self.fps)
-
-        self.rate = RATE
-
-        th = threading.Thread(target = self.event_handling, args = [])
-        th.start()
-
 
         while self.running:
+            self.process_events()
+
             if self.playing and not self.paused:
                 if self.action != GO_DOWN:
                     self.piece.action(self.action)
