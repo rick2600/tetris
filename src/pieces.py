@@ -69,17 +69,19 @@ class Piece:
 
     def can_go_left(self):
         for i in range(self.height):
-            space_value = self.space[self.x+i][self.y-1]
-            if self.matrix[i][0] != E and space_value > E:
-                return False
+            for j in range(self.width):
+                space_value = self.space[self.x+i][self.y+j-1]
+                if self.matrix[i][j] != E and space_value > E:
+                    return False
         return True
 
 
     def can_go_right(self):
         for i in range(self.height):
-            space_value = self.space[self.x+i][self.y+self.width]
-            if self.matrix[i][-1] != E and space_value > E:
-                return False
+            for j in range(self.width):
+                space_value = self.space[self.x+i][self.y+j+1]
+                if self.matrix[i][j] != E and space_value > E:
+                    return False
         return True
 
 
