@@ -1,6 +1,8 @@
 import pygame
 import pygame.font
 from constants import *
+import base64
+import io
 
 
 class GUI:
@@ -47,6 +49,15 @@ class GUI:
 
         rect = pygame.Rect(y, x, self.rect_size, self.rect_size, border_radius=radius)
         pygame.draw.rect(self.screen, theme['bg-color'], rect, 0, border_radius=radius)
+
+        img_src = theme.get('img', None)
+        if img_src != None:
+            img_src = io.BytesIO(base64.b64decode(img_src))
+            img = pygame.image.load(img_src)
+            img = pygame.transform.scale(img, (RECT_SIZE, RECT_SIZE))
+            self.screen.blit(img, rect)
+
+
         if theme['border-size']:
             pygame.draw.rect(
                 self.screen,
