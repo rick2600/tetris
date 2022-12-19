@@ -17,9 +17,10 @@ GO_LEFT        = 1
 GO_RIGHT       = 2
 ROTATE         = 3
 
-FPS = 13
-FPS_INC = 6
-RATE = 5
+FPS            = 13
+FPS_INC        = 30
+RATE           = 5
+
 
 DEFAULT_THEME = {
     "bg-color": "#2e2e2e",

@@ -3,7 +3,7 @@ import numpy as np
 import random
 
 class Piece:
-    def __init__(self, matrix, space, rotate=True):
+    def __init__(self, matrix, space, rotate=False):
         if rotate:
             k = random.randint(0, 4)
         else:
@@ -17,10 +17,10 @@ class Piece:
         self.x = 0
         self.y = (len(self.space[0]) - self.width) // 2
 
-        self.movable = self.can_move()
+        #self.movable = self.can_move()
 
 
-
+    '''
     def can_move(self):
         if self.can_go_down():
             return True
@@ -36,7 +36,7 @@ class Piece:
             self.height -= 1
 
         return self.height > 0
-
+    '''
 
 
 
@@ -150,7 +150,7 @@ class Piece:
 
 
 class PieceI(Piece):
-    def __init__(self, space, rotate=True):
+    def __init__(self, space, rotate=False):
         matrix = np.array([
             [I, I, I, I],
         ])
@@ -159,7 +159,7 @@ class PieceI(Piece):
 
 
 class PieceT(Piece):
-    def __init__(self, space, rotate=True):
+    def __init__(self, space, rotate=False):
         matrix = np.array([
             [0, T, 0],
             [T, T, T],
@@ -168,7 +168,7 @@ class PieceT(Piece):
 
 
 class PieceO(Piece):
-    def __init__(self, space, rotate=True):
+    def __init__(self, space, rotate=False):
         matrix = np.array([
             [O, O],
             [O, O]
@@ -177,7 +177,7 @@ class PieceO(Piece):
 
 
 class PieceZ(Piece):
-    def __init__(self, space, rotate=True):
+    def __init__(self, space, rotate=False):
         matrix = np.array([
             [Z, Z, 0],
             [0, Z, Z]
@@ -185,7 +185,7 @@ class PieceZ(Piece):
         super().__init__(matrix, space, rotate)
 
 class PieceS(Piece):
-    def __init__(self, space, rotate=True):
+    def __init__(self, space, rotate=False):
         matrix = np.array([
             [0, S, S],
             [S, S, 0]
@@ -194,7 +194,7 @@ class PieceS(Piece):
 
 
 class PieceL(Piece):
-    def __init__(self, space, rotate=True):
+    def __init__(self, space, rotate=False):
         matrix = np.array([
             [0, 0, L],
             [L, L, L]
@@ -203,7 +203,7 @@ class PieceL(Piece):
 
 
 class PieceJ(Piece):
-    def __init__(self, space, rotate=True):
+    def __init__(self, space, rotate=False):
         matrix = np.array([
             [J, 0, 0],
             [J, J, J]

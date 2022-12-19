@@ -92,7 +92,7 @@ class GUI:
         self.next_piece_label = pygame.Rect(prev_y, prev_x + prev_h + 1 * size, prev_w, size)
         prev_y, prev_x, prev_w, prev_h = self.next_piece_label
 
-        self.next_piece_box =  pygame.Rect(prev_y, prev_x + 1 * size, r_width, size * 5)
+        self.next_piece_box =  pygame.Rect(prev_y, prev_x + 1 * size, r_width, size * 3)
         prev_y, prev_x, prev_w, prev_h = self.next_piece_box
 
         self.controls_label = pygame.Rect(prev_y, prev_x + prev_h + 1 * size, r_width, size)
